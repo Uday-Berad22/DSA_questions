@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int cal(string s,int n1,int n2)
+    {
+        if(s=="+")
+        {
+            return n2+n1;
+        }
+        else if(s=="-")
+        {
+            return n2-n1;
+        }
+        else if(s=="*")
+        {
+            return n2*n1;
+        }
+        else
+        {
+            return n2/n1;
+        }
+    }
+    int evalRPN(vector<string>& v) {
+        stack<int> st;
+        for(int i=0;i<v.size();i++)
+        {
+            if(v[i]!="+"&&v[i]!="-"&&v[i]!="*"&&v[i]!="/")
+            {
+                int n;
+                n=stoi(v[i]);
+                st.push(n); 
+            }
+            else
+            {
+                int n1,n2;
+                n1=st.top();
+                st.pop();
+                n2=st.top();
+                st.pop();
+                int val;
+                val=cal(v[i],n1,n2);
+                st.push(val);
+            }
+        }
+        return st.top();
+    }
+};
