@@ -1,0 +1,49 @@
+//https://practice.geeksforgeeks.org/problems/check-for-bst/1?utm_source=geeksforgeeks&utm_medium=article_practice_tab&utm_campaign=article_practice_tab
+
+class Solution
+{
+    vector<int> v;
+    public:
+    //Function to check whether a Binary Tree is BST or not.
+    int arraySortedOrNot( int n)
+{
+    // Array has one or no element or the
+    // rest are already checked and approved.
+    if (n == 1 || n == 0)
+        return 1;
+ 
+    // Unsorted pair found (Equal values allowed)
+    if (v[n - 1] < v[n - 2])
+        return 0;
+ 
+    // Last pair was sorted
+    // Keep on checking
+    return arraySortedOrNot( n - 1);
+}
+void inorder(Node *p)
+{
+    if(p!=NULL)
+    {
+        inorder(p->left);
+        v.push_back(p->data);
+        inorder(p->right);
+    }
+    return;
+}
+    
+    bool isBST(Node* root) 
+    {
+        // Your code here
+        
+        inorder(root);
+       if(arraySortedOrNot(v.size())==0)
+       {
+           return false;
+       }
+       else
+       {
+           return true;
+       }
+    }
+};
+
